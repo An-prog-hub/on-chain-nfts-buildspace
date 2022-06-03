@@ -19,9 +19,12 @@ contract MyEpicNFT is ERC721URIStorage {
   // So, we make a baseSvg variable here that all our NFTs can use.
   string baseSvg = "<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMinYMin meet' viewBox='0 0 350 350'><style>.base { fill: white; font-family: serif; font-size: 24px; }</style><rect width='100%' height='100%' fill='black' /><text x='50%' y='50%' class='base' dominant-baseline='middle' text-anchor='middle'>";
 
+    // These are the structs in solidity that we need to use.
   string[] firstWords = ["Cool", "Dope", "Sexy", "Crazy", "Spooky", "Wild"];
   string[] secondWords = ["Pizza", "Cup", "Tea", "Chocolate", "Veggies", "Coffee"];
   string[] thirdWords = ["Joe", "Smith", "Tejas", "Aryan", "Sal", "Elon"];
+
+ event NewEpicNFTMinted(address sender, uint256 tokenId);
 
   constructor() ERC721 ("SquareNFT", "SQUARE") {
     console.log("This is my Epic NFT contract!");
@@ -91,5 +94,6 @@ contract MyEpicNFT is ERC721URIStorage {
   
     _tokenIds.increment();
     console.log("An NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
+    emit NewEpicNFTMinted(msg.sender, newItemId);
   }
 }
